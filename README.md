@@ -1,4 +1,4 @@
-# go-policy-template
+# swift-policy-template
 
 This is a template repository that can be used to to quickly scaffold a
 Kubewarden policy written with Swift language.
