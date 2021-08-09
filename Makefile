@@ -1,5 +1,5 @@
 CONTAINER_RUNTIME ?= docker
-CONTAINER_IMAGE := "swift-wasm-runner:latest"
+CONTAINER_IMAGE := "ghcr.io/kubewarden/swift-wasm-runner:latest"
 
 build:
 ifndef CONTAINER_RUNTIME
