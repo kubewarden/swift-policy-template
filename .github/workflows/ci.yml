@@ -18,7 +18,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Run tests
-        uses: docker://ghcr.io/kubewarden/swift-wasm-runner:latest
+        uses: docker://ghcr.io/kubewarden/swift-wasm-runner:5.3
         with:
           entrypoint: carton
           args: test
@@ -78,79 +78,86 @@ jobs:
           path: ${{ env.WASM_BINARY_NAME }}
           if-no-files-found: error
 
-          #  push-to-oci-registry:
-          #    needs: tests
-          #    if: github.event.workflow_run.event != 'pull_request'
-          #    runs-on: ubuntu-latest
-          #    env:
-          #      OCI_TARGET: ghcr.io/kubewarden/policies/pod-runtime
-          #      KWCTL_VERSION: v0.1.5
-          #
-          #    steps:
-          #      - name: Download artifact
-          #        uses: actions/download-artifact@v2
-          #        with:
-          #          name: policy.wasm
-          #
-          #      - name: Login to GitHub Container Registry
-          #        uses: docker/login-action@v1
-          #        with:
-          #          registry: ghcr.io
-          #          username: ${{ github.repository_owner }}
-          #          password: ${{ secrets.GITHUB_TOKEN }}
-          #
-          #      - name: Download kwctl
-          #        run: |
-          #          curl -L https://github.com/kubewarden/kwctl/releases/download/${{env.KWCTL_VERSION}}/kwctl-linux-amd64.zip -o kwctl.zip
-          #          unzip kwctl.zip
-          #          chmod 755 kwctl
-          #
-          #      - name: Publish Wasm policy artifact to OCI registry with the 'latest' tag
-          #        if: startsWith(github.ref, 'refs/heads/')
-          #        run: |
-          #          ./kwctl push -p policy.wasm registry://${{ env.OCI_TARGET}}:latest
-          #
-          #      - name: Publish Wasm policy artifact to OCI registry with the version tag and 'latest'
-          #        if: startsWith(github.ref, 'refs/tags/')
-          #        run: |
-          #          export OCI_TAG=$(echo $GITHUB_REF | sed -e "s|refs/tags/||")
-          #          ./kwctl push -p policy.wasm registry://${{ env.OCI_TARGET}}:${OCI_TAG}
-          #
-          #  release:
-          #    needs: tests
-          #    if: ${{ github.event.workflow_run.event != 'pull_request' && startsWith(github.ref, 'refs/tags/') }}
-          #    runs-on: ubuntu-latest
-          #
-          #    steps:
-          #      - name: Download artifact
-          #        uses: actions/download-artifact@v2
-          #        with:
-          #          name: policy.wasm
-          #
-          #      - name: Create Release
-          #        id: create_release
-          #        uses: actions/create-release@v1
-          #        env:
-          #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          #        with:
-          #          tag_name: ${{ github.ref }}
-          #          release_name: Release ${{ github.ref }}
-          #          draft: false
-          #          prerelease: false
-          #
-          #      - name: Upload Release Asset
-          #        id: upload-release-asset
-          #        uses: actions/upload-release-asset@v1
-          #        env:
-          #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          #        with:
-          #          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          #          asset_path: policy.wasm
-          #          asset_name: policy.wasm
-          #          asset_content_type: application/wasm
-          #
-          #      - name: Notify policy-hub
-          #        uses: kubewarden/notify-policy-hub@main
-          #        with:
-          #          USERNAME: chimera-kube-bot
-          #          PAT: ${{ secrets.WORKFLOW_PAT }}
+#####################################################################
+#                                                                   #
+# TODO: Uncommend the remaining part of the file and customize them #
+#                                                                   #
+#####################################################################
+
+#  push-to-oci-registry:
+#    needs: tests
+#    if: github.event.workflow_run.event != 'pull_request'
+#    runs-on: ubuntu-latest
+#    env:
+#      # TODO: enter the proper OCI TARGEt (e.g.: ghcr.io/kubewarden/policies/pod-runtime)
+#      OCI_TARGET: TODO
+#      KWCTL_VERSION: v0.1.5
+#
+#    steps:
+#      - name: Download artifact
+#        uses: actions/download-artifact@v2
+#        with:
+#          name: policy.wasm
+#
+#      - name: Login to GitHub Container Registry
+#        uses: docker/login-action@v1
+#        with:
+#          registry: ghcr.io
+#          username: ${{ github.repository_owner }}
+#          password: ${{ secrets.GITHUB_TOKEN }}
+#
+#      - name: Download kwctl
+#        run: |
+#          curl -L https://github.com/kubewarden/kwctl/releases/download/${{env.KWCTL_VERSION}}/kwctl-linux-amd64.zip -o kwctl.zip
+#          unzip kwctl.zip
+#          chmod 755 kwctl
+#
+#      - name: Publish Wasm policy artifact to OCI registry with the 'latest' tag
+#        if: startsWith(github.ref, 'refs/heads/')
+#        run: |
+#          ./kwctl push -p policy.wasm registry://${{ env.OCI_TARGET}}:latest
+#
+#      - name: Publish Wasm policy artifact to OCI registry with the version tag and 'latest'
+#        if: startsWith(github.ref, 'refs/tags/')
+#        run: |
+#          export OCI_TAG=$(echo $GITHUB_REF | sed -e "s|refs/tags/||")
+#          ./kwctl push -p policy.wasm registry://${{ env.OCI_TARGET}}:${OCI_TAG}
+#
+#  release:
+#    needs: tests
+#    if: ${{ github.event.workflow_run.event != 'pull_request' && startsWith(github.ref, 'refs/tags/') }}
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Download artifact
+#        uses: actions/download-artifact@v2
+#        with:
+#          name: policy.wasm
+#
+#      - name: Create Release
+#        id: create_release
+#        uses: actions/create-release@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          tag_name: ${{ github.ref }}
+#          release_name: Release ${{ github.ref }}
+#          draft: false
+#          prerelease: false
+#
+#      - name: Upload Release Asset
+#        id: upload-release-asset
+#        uses: actions/upload-release-asset@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          upload_url: ${{ steps.create_release.outputs.upload_url }}
+#          asset_path: policy.wasm
+#          asset_name: policy.wasm
+#          asset_content_type: application/wasm
+#
+#      - name: Notify policy-hub
+#        uses: kubewarden/notify-policy-hub@main
+#        with:
+#          USERNAME: chimera-kube-bot
+#          PAT: ${{ secrets.WORKFLOW_PAT }}
