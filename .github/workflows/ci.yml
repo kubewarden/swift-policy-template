@@ -18,7 +18,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Run tests
-        uses: docker://ghcr.io/kubewarden/swift-wasm-runner:5.3
+        uses: docker://ghcr.io/kubewarden/swift-wasm-runner:5.3-p1
         with:
           entrypoint: carton
           args: test
