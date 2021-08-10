@@ -1,10 +1,23 @@
 import Foundation
 import kubewardenSdk
+import Logging
 import SwiftPath
-import Foundation
 
 
 public func validate(payload: String) -> String {
+  let logger = Logger(label: "testing")
+  logger.info("Hello World!")
+
+  let name = "flavio"
+  logger.info("interpolation in action \(name)")
+
+  logger.info("Another message",
+              metadata: [
+                "foo": "bar",
+                "number": .stringConvertible(42),
+                "more-numbers": [.stringConvertible(1), .stringConvertible(2)],
+              ])
+
   let vr : ValidationRequest<Settings> = try! JSONDecoder().decode(
     ValidationRequest<Settings>.self, from: Data(payload.utf8))
 

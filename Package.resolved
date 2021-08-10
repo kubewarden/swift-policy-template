@@ -15,8 +15,17 @@
         "repositoryURL": "https://github.com/kubewarden/policy-sdk-swift.git",
         "state": {
           "branch": null,
-          "revision": "feaf04f18c60174623a13d5938f3a432f387c9a2",
-          "version": "0.1.5"
+          "revision": "59cc979fa9994f1653d3d3e3dd3072188b2c0a18",
+          "version": "0.1.6"
+        }
+      },
+      {
+        "package": "swift-log",
+        "repositoryURL": "https://github.com/apple/swift-log.git",
+        "state": {
+          "branch": null,
+          "revision": "5d66f7ba25daf4f94100e7022febf3c75e37a6c7",
+          "version": "1.4.2"
         }
       },
       {
