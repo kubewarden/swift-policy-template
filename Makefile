@@ -24,7 +24,7 @@ endif
 
 clean:
 	sudo rm -rf .build
-	rm -rf policy.wasm
+	rm -rf *.wasm
 
 release:
 ifndef CONTAINER_RUNTIME
@@ -42,7 +42,7 @@ endif
 	wasm-opt -Os .build/wasm32-unknown-wasi/release/Policy.wasm -o policy.wasm
 
 annotate:
-	kwctl annotate -m metadata.yml -o policy-annotated.wasm policy.wasm
+	kwctl annotate -m metadata.yml -o annotated-policy.wasm policy.wasm
 
 e2e-tests:
 	bats e2e.bats
