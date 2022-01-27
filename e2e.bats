@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
 @test "reject because name is denied" {
-  run kwctl run policy.wasm -r Tests/Examples/PodRequest.json --settings-json '{"deniedNames": ["nginx"]}'
+  run kwctl run annotated-policy.wasm -r Tests/Examples/PodRequest.json --settings-json '{"deniedNames": ["nginx"]}'
 
   # this prints the output when one the checks below fails
   echo "output = ${output}"
@@ -13,7 +13,7 @@
 }
 
 @test "accept because name is not denied" {
-  run kwctl run policy.wasm -r Tests/Examples/PodRequest.json --settings-json '{"deniedNames": ["foo"]}'
+  run kwctl run annotated-policy.wasm -r Tests/Examples/PodRequest.json --settings-json '{"deniedNames": ["foo"]}'
   # this prints the output when one the checks below fails
   echo "output = ${output}"
 
@@ -23,7 +23,7 @@
 }
 
 @test "accept because no name is denied" {
-  run kwctl run policy.wasm -r Tests/Examples/PodRequest.json --settings-json '{}'
+  run kwctl run annotated-policy.wasm -r Tests/Examples/PodRequest.json --settings-json '{}'
   # this prints the output when one the checks below fails
   echo "output = ${output}"
 
