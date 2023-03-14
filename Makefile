@@ -49,7 +49,7 @@ artifacthub-pkg.yml: metadata.yml
 	&& mv artifacthub-pkg.yml.tmp artifacthub-pkg.yml \
 	|| rm -f artifacthub-pkg.yml.tmp
 
-annotate:
+annotate: artifacthub-pkg.yml
 	kwctl annotate -m metadata.yml -u README.md -o annotated-policy.wasm policy.wasm
 
 e2e-tests:
