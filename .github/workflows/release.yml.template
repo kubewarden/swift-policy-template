@@ -25,6 +25,6 @@ jobs:
 
     uses: kubewarden/github-actions/.github/workflows/reusable-release-policy-swift.yml@v2
     with:
-      oci-target: # FIXME: use something like: ghcr.io/${{ github.repository_owner }}/policies/pod-runtime
+      oci-target: # FIXME: use something like: ghcr.io/${{ github.repository_owner }}/policies/policy-name
     secrets:
       workflow-pat: ${{ secrets.WORKFLOW_PAT }}
