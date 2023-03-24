@@ -44,7 +44,7 @@ endif
 	@printf "Optimize Wasm binary, hold on...\n"
 	wasm-opt -Os .build/wasm32-unknown-wasi/release/Policy.wasm -o policy.wasm
 
-artifacthub-pkg.yml: metadata.yml go.mod
+artifacthub-pkg.yml: metadata.yml
 	$(warning If you are updating the artifacthub-pkg.yml file for a release, \
 	  remember to set the VERSION variable with the proper value. \
 	  To use the latest tag, use the following command:  \
