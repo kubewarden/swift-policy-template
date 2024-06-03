@@ -1,3 +1,5 @@
+[![Sandbox](https://img.shields.io/badge/status-sandbox-red?style=for-the-badge)](https://github.com/kubewarden/community/blob/main/REPOSITORIES.md#sandbox)
+
 # swift-policy-template
 
 This is a template repository that can be used to to quickly scaffold a
